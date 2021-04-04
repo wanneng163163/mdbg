@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>魔都办公</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+    body,
+    html,
+    #container {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+    </style>
+    <script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=zH3rUOmjfo6uVtG4wvFropNsTKHGNe6F"></script>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+var map = new BMapGL.Map('container');
+map.centerAndZoom(new BMapGL.Point(121.511999, 31.239185), 12);
+map.enableScrollWheelZoom(true);
+var murl=[];var off=[];var x=[];var y=[];var z=[];//
+
+//x[1]=121.511999;y[1]=31.239185;
+z[1]="121.511999,31.239185";
+off[1]="上海中心";
+//off[1]='<a href="https://mp.weixin.qq.com/s?__biz=MzI5MDM2OTA4Mg==&mid=2247487713&idx=1&sn=256b679f9c1c6bff7d20f78d45739ca5&chksm=ec21abb4db5622a26163717650a0ed6282c366e60fa8c0f9bf4ada2a19ddc7b28875bcc6121f&token=463999182&lang=zh_CN&scene=21#wechat_redirect";>上海中心</a>';
+murl[1]="https://mp.weixin.qq.com/s?__biz=MzI5MDM2OTA4Mg==&mid=2247487713&idx=1&sn=256b679f9c1c6bff7d20f78d45739ca5&chksm=ec21abb4db5622a26163717650a0ed6282c366e60fa8c0f9bf4ada2a19ddc7b28875bcc6121f&token=463999182&lang=zh_CN&scene=21#wechat_redirect";
+//x[2]=121.512999;y[2]=31.239585;
+z[2]="121.508892,31.242699";
+off[2]='国金中心';
+murl[2]="https://mp.weixin.qq.com/s?__biz=MzI5MDM2OTA4Mg==&mid=2247487805&idx=1&sn=2f7023b94dd0c7673462e37889e8c791&chksm=ec21aa68db56237e7a030feb32d59897cde8d81fe6813d13071b4c4c450b4c10def949e50a2c&token=463999182&lang=zh_CN&scene=21#wechat_redirect";
+z[3]="121.509988,31.238761";
+off[3]="金砖大厦";
+murl[3]="https://mp.weixin.qq.com/s?__biz=MzI5MDM2OTA4Mg==&mid=2247487703&idx=1&sn=68ee667c31102504c569acd53d7f8cae&chksm=ec21ab82db562294ecfe740466cf3512559d5a05e380fda0e376ed2925c6d7d79c6d3592423e&token=1208830993&lang=zh_CN&scene=21#wechat_redirect";
+
+
+for (i=1;i<murl.length;i++) {
+	 var label = new BMapGL.Label(); 
+	 label.setStyle({ color: 'blue', borderRadius: '3px', borderColor: '#ccc', padding: '5px', fontSize: '8px', height: '12px', lineHeight: '10px', fontFamily: '宋体' }); 
+	 label.setContent(off[i]); 
+	 //label.setContent('test');
+	 //label.setPosition(new BMapGL.Point(x[i],y[i])); 
+	 var p0 = z[i].split(",")[0]; //  
+     var p1 = z[i].split(",")[1]; //按照原数组的point格式将地图点坐标的经纬度分别提出来
+	
+     //point = new window.BMap.Point(p0, p1); //循环生成新的地图点
+	 label.setPosition(new BMapGL.Point(Number(p0), Number(p1)));  
+	 map.addOverlay(label);
+     label.addEventListener('click',change.bind(null,murl[i]));
+}
+function change(url){
+	 //document.location='http://baidu.com';
+	 //alert(murl[i]);
+	 //window.location.href=url;
+	 window.open(url, '_blank'); 
+			}
+</script>
